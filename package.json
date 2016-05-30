@@ -1,10 +1,10 @@
 {
   "name": "gulp-workflow-in-es6",
   "version": "1.0.0",
-  "description": "Gulp to the next level",
+  "description": "Peace of mind with Gulp on the next level",
   "main": "gulpfile.babel.js",
   "scripts": {
-    "test": "gulp --tasks"
+    "test": "gulp"
   },
   "repository": {
     "type": "git",

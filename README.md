@@ -1,28 +1,30 @@
-__CARE: THIS IS STILL A WiP!!1__
-
-0. Separation of tasks: peace of mind
-1. A watch that actually watches
-2. Get a notifications when something goes wrong
+0. Create, add and remove tasks the es6 way
+1. Get useful notifications when something goes wrong (currently still bugged)
+2. Precompiled es6 will automatically be compiled (in the `js` task)
 
 # Get started...
 
-1. Install [Node.js](#//TODO) from here (which comes with NPM) and then run:
-	a. `npm install -g n` (for switching between node versions)
-	b. `npm install gulp-cli -global` //TODO
-	d. npm babel-cli install //TODO
-2. Do a `npm install` to install all node modules locally
-3. Run `gulp` to start the watch
+1. Install ^v6 of [Node.js](https://nodejs.org) 
+    - In case you’ve already installed Node.js, you may break older Node applications/workflows with the latest version. So in that case I recommend to install `n` which allows you to switch between Node versions. Run `npm install n -global` and `n 6.2.0`. From there you can just run `n` to switch between Node versions.
+2. Run `npm install gulp-cli -global`
+3. Run `npm install` to install all node modules locally
+4. Run `gulp` to start the workflow (watch included). If you’re wondering what it's doing, run `gulp --tasks`. Once you’re done, run `gulp build` to get a version ready to distribute.
 
-# Commands
+... or [create 1-2-3 even more tasks.](1-2-3-GO.md)
 
-Start the workflow with `gulp` and a BrowserSync server will fire up. All files will be generated at a new (cleaned) the /test folder. Fire `gulp build` up for a clean build and please check `gulp --tasks` for an oversight of all tasks.
-
-## Why
+# So why... uhm...
 
 #### Why haven't you created a function to import tasks?
 
-Because: `import` (and `export`) statements may only appear at the top level. And there’s a [good reason for that](http://stackoverflow.com/questions/34203325/why-must-export-import-declarations-be-on-top-level-in-es2015).
+Because: `import` (and `export`) statements “may only appear at top level.” And there’s a [good reason for that](http://stackoverflow.com/questions/34203325/why-must-export-import-declarations-be-on-top-level-in-es2015).
 
-#### Why all these depreciating warnings?
+#### Why is there a notice to update the `graceful-fs` mode? 
 
-Because some of the dependencies that are being called in the gulp (tasks) use a depreciated version of the NPM `graceful-fs `. This problem should solve itself, and won't be a problem as long as you're on Node.js v6.x.x.
+Because some of the dependencies are relying on older versions of `graceful-fs `. This won’t affect the workflow. Hopefully the creators of the packages will soon update their dependency trees.
+
+# Wishes
+
+- Better notifications (nice, useful error messages)
+- Integrate linting of stylus (+ checking css) and js
+- Ready-to-go `sass` task?
+- Ideas..? Let me know at [info@mellewynia.nl](info@mellewynia.nl) or [@MelleWynia](http://twitter.com/MelleWynia)

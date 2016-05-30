@@ -7,8 +7,7 @@
             "css": "assets/css",
             "font": "assets/fonts",
             "image": "assets/images",
-            "js": "assets/js",
-            "icon": "assets/icons"
+            "js": "assets/js"
         }
     }
 }
