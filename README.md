@@ -18,7 +18,7 @@
 
 Because: `import` (and `export`) statements “may only appear at top level.” And there’s a [good reason for that](http://stackoverflow.com/questions/34203325/why-must-export-import-declarations-be-on-top-level-in-es2015).
 
-#### Why is there a notice to update the `graceful-fs` mode? 
+#### Why is there a notice to update the `graceful-fs` module? 
 
 Because some of the dependencies are relying on older versions of `graceful-fs `. This won’t affect the workflow. Hopefully the creators of the packages will soon update their dependency trees.
 
