@@ -20,6 +20,9 @@
       "es2015"
     ]
   },
+  "engines": {
+      "node": "~6.2.0"
+  },
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.8.0",
