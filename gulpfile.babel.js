@@ -10,27 +10,27 @@ import clean from 'gulp-clean';
 // Task: Browser Sync
 // 
 
-import taskBrowserSync from './source/tasks/browser-sync';
+import taskBrowserSync from './tasks/browser-sync';
 gulp.task('browser-sync', taskBrowserSync);
 
 //
 // Task: Clean build
 // 
 
-import taskClean from './source/tasks/clean';
+import taskClean from './tasks/clean';
 gulp.task('clean', taskClean);
 
-import taskCleanProduction from './source/tasks/clean-production';
+import taskCleanProduction from './tasks/clean-production';
 gulp.task('clean-production', taskCleanProduction);
 
 //
 // Pug (formely known as Jade)
 //
 
-import taskPug from './source/tasks/pug';
+import taskPug from './tasks/pug';
 gulp.task('pug', taskPug);
 
-import taskPugProduction from './source/tasks/pug-production';
+import taskPugProduction from './tasks/pug-production';
 gulp.task('pug-production', taskPugProduction);
 
 
@@ -38,36 +38,36 @@ gulp.task('pug-production', taskPugProduction);
 // Styles
 //
 
-import taskStyles from './source/tasks/styles';
+import taskStyles from './tasks/styles';
 gulp.task('styles', taskStyles);
 
-import taskStylesProduction from './source/tasks/styles-production';
+import taskStylesProduction from './tasks/styles-production';
 gulp.task('styles-production', taskStylesProduction);
 
 //
 // Assets
 //
 
-import taskFonts from './source/tasks/fonts';
+import taskFonts from './tasks/fonts';
 gulp.task('fonts', taskFonts);
 
-import taskFontsProduction from './source/tasks/fonts-production';
+import taskFontsProduction from './tasks/fonts-production';
 gulp.task('fonts-production', taskFontsProduction);
 
-import taskImages from './source/tasks/images';
+import taskImages from './tasks/images';
 gulp.task('images', taskImages);
 
-import taskImagesProduction from './source/tasks/images-production';
+import taskImagesProduction from './tasks/images-production';
 gulp.task('images-production', taskImagesProduction);
 
 //
 // JavaScript
 //
 
-import taskJS from './source/tasks/js';
+import taskJS from './tasks/js';
 gulp.task('js', taskJS);
 
-import taskJSProduction from './source/tasks/js-production';
+import taskJSProduction from './tasks/js-production';
 gulp.task('js-production', ['js'], taskJSProduction);
 
 //

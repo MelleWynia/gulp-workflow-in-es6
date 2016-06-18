@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '../../gulpfile.config';
+import config from '../gulpfile.config';
 
 import gulp from 'gulp';
 import notify from 'gulp-notify';
