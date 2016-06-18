@@ -81,30 +81,30 @@ gulp.task('js-production', ['js'], taskJSProduction);
 //
 //
 
-gulp.task('default', ['clean'], function () {
+gulp.task('default', ['clean'], () => {
 
     gulp.start('fonts');
-    watch([ './'+config.paths.source+'/font/**' ], function() {
+    watch([ './'+config.paths.source+'/font/**' ], () => {
         gulp.start('fonts');
     });
 
     gulp.start('images');
-    watch([ './'+config.paths.source+'/image/**/*' ], function() {
+    watch([ './'+config.paths.source+'/image/**/*' ], () => {
         gulp.start('images');
     });
 
     gulp.start('pug');
-    watch([ './'+config.paths.source+'/pug/**/*.pug' ], function() {
+    watch([ './'+config.paths.source+'/pug/**/*.pug' ], () => {
         gulp.start('pug');
     });
 
     gulp.start('styles');
-    watch([ './'+config.paths.source+'/stylus/**/*.styl' ], function() {
+    watch([ './'+config.paths.source+'/stylus/**/*.styl' ], () => {
         gulp.start('styles');
     });
 
     gulp.start('js');
-    watch([ './'+config.paths.source+'/js/**/*.js' ], function() {
+    watch([ './'+config.paths.source+'/js/**/*.js' ], () => {
         gulp.start('js');
     });
 

@@ -15,8 +15,7 @@ export default () => {
             return { icon:false, title:'CSS ERROR ON LINE '+error.line, message:error.message };
         }))
         .pipe(autoprefixer({ //CARE Autoprefixer slows this task down..!
-            browsers: ['last 2 versions'],
-            remove: false // only for dev
+            browsers: config.browsers
         }))
         .pipe(cleanCSS())
         .pipe(gulp.dest('./'+config.paths.build+'/assets/css'));

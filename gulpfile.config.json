@@ -9,5 +9,6 @@
             "image": "assets/images",
             "js": "assets/js"
         }
-    }
+    },
+    "browsers": ["last 2 versions"]
 }

@@ -17,7 +17,7 @@ export default () => {
                 return { icon:false, title:'CSS ERROR ON LINE '+error.line, message:error.message };
             }))
             .pipe(autoprefixer({ //CARE Autoprefixer slows (x5) this task down..!
-                browsers: ['last 2 versions'],
+                browsers: config.browsers,
                 remove: false // only for dev
             }))
         .pipe(sourcemaps.write())
