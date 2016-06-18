@@ -10,7 +10,7 @@ import pug from 'gulp-pug';
 export default () => {
 
     return gulp.src( './'+config.paths.source+'/pug/*.pug' )
-        .pipe(notify({ icon:false, onLast:false, title:'Processing pug', message: 'Started processing changes in pug' }))
+        //.pipe(notify({ icon:false, onLast:false, title:'Processing pug', message: 'Started processing changes in pug' }))
         .pipe(pug({
             pretty: true,
             data: {
@@ -27,5 +27,5 @@ export default () => {
             return { icon:false, title:title, message:message };
         }))
         .pipe(gulp.dest( './'+config.paths.test+'' ))
-        .pipe(notify({ icon:false, onLast:true, title:'Updated pug', message: 'Compiled the pug to html' }));
+        //.pipe(notify({ icon:false, onLast:true, title:'Updated pug', message: 'Compiled the pug to html' }));
 }
