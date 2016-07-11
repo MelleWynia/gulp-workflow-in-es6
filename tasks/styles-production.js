@@ -11,7 +11,9 @@ import cleanCSS from 'gulp-clean-css';
 
 export default () => {
     return gulp.src('./'+config.paths.source+'/stylus/*.styl')
-        .pipe(stylus()).on('error', notify.onError( (error) => {
+        .pipe(stylus({
+            'include css': true
+        })).on('error', notify.onError( (error) => {
             return { icon:false, title:'CSS ERROR ON LINE '+error.line, message:error.message };
         }))
         .pipe(autoprefixer({ //CARE Autoprefixer slows this task down..!

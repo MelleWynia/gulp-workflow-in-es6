@@ -13,7 +13,9 @@ import autoprefixer from 'gulp-autoprefixer';
 export default () => {
     return gulp.src('./'+config.paths.source+'/stylus/*.styl')
         .pipe(sourcemaps.init())
-            .pipe(stylus()).on('error', notify.onError( (error) => {
+            .pipe(stylus({
+                'include css': true
+            })).on('error', notify.onError( (error) => {
 
                 console.log(error.message);
 

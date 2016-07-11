@@ -9,11 +9,11 @@ import clean from 'gulp-clean';
 
 export default () => {
 
-    return gulp.src( './'+config.paths.test+'/assets/font', {read: false} )
+    return gulp.src( './'+config.paths.test+'/assets/fonts', {read: false} )
         .pipe(clean())
         .on('end', () => {
-            return gulp.src( './'+config.paths.source+'/font/**' )
-                .pipe(gulp.dest( './'+config.paths.test+'/assets/font' ))
-                .pipe(notify({ icon:false, onLast:true, title:'Font asset updated', message: 'Cleaned and copied font to dist/asset/font' }));
+            return gulp.src( './'+config.paths.source+'/fonts/**' )
+                .pipe(gulp.dest( './'+config.paths.test+'/assets/fonts' ))
+                .pipe(notify({ icon:false, onLast:true, title:'Font assets updated', message: 'Cleaned and copied font to dist/assets/fonts' }));
         });
 }
