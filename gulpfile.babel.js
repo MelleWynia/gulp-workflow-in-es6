@@ -5,6 +5,7 @@ import config from './gulpfile.config';
 import gulp from 'gulp';
 
 import clean from 'gulp-clean';
+import watch from 'gulp-watch';
 
 //
 // Task: Browser Sync
@@ -78,11 +79,11 @@ gulp.task('develop', ['pug', 'fonts', 'images', 'styles', 'js'], () => {
 
     gulp.start('browser-sync');
 
-    gulp.watch([ './'+config.paths.source+'/fonts/**/*' ], ['fonts']);
-    gulp.watch([ './'+config.paths.source+'/images/**/*' ], ['images']);
-    gulp.watch([ './'+config.paths.source+'/pug/**/*.pug' ], ['pug']);
-    gulp.watch([ './'+config.paths.source+'/stylus/**/*' ], ['styles']);
-    gulp.watch([ './'+config.paths.source+'/js/**/*.js' ], ['js']);
+    watch([ './'+config.paths.source+'/fonts/**/*' ], () => { gulp.start('fonts'); });
+    watch([ './'+config.paths.source+'/images/**/*' ], () => { gulp.start('images'); });
+    watch([ './'+config.paths.source+'/pug/**/*.pug' ], () => { gulp.start('pug'); });
+    watch([ './'+config.paths.source+'/stylus/**/*.styl' ], () => { gulp.start('styles'); });
+    watch([ './'+config.paths.source+'/js/**/*.js' ], () => { gulp.start('js'); });
 
 });
 

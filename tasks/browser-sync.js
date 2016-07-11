@@ -16,7 +16,7 @@ export default () => {
             ignored: '*.txt'
         },
         files: [
-            "./"+config.paths.test+"/**/*.*"
+            "./"+config.paths.test+"/**/*"
         ]
     });
 }
