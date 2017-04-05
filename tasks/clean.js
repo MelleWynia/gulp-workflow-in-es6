@@ -1,13 +1,13 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
+const gulp = require('gulp');
 
-import clean from 'gulp-clean';
+const clean = require('gulp-clean');
 
-export default () => {
+module.exports = () => {
 
-    return gulp.src( './'+config.paths.test, {read: false} )
+    return gulp.src( process.env.DEST, {read: false} )
         .pipe(clean());
 }

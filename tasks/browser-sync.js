@@ -1,22 +1,20 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
-import notify from 'gulp-notify';
-import browserSync from 'browser-sync';
+const gulp = require('gulp');
+const notify = require('gulp-notify');
+const browserSync = require('browser-sync');
 
-export default () => {
+module.exports = () => {
+
     browserSync.init({
         server: {
-            baseDir: "./"+config.paths.test
-        },
-        watchOptions: {
-            ignoreInitial: true,
-            ignored: '*.txt'
+            baseDir: process.env.DEST
         },
         files: [
-            "./"+config.paths.test+"/**/*"
+            `${process.env.DEST}/**/*!(.html)`
         ]
     });
+
 }
