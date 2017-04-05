@@ -1,0 +1,5 @@
+mixin super-button(button)
+    - button = Object.assign({title: 'Do it, do IT!'}, button)
+
+    super-button.button( title=button.title )
+        block

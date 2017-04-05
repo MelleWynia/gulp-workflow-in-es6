@@ -1,27 +1,41 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const notify = require('gulp-notify');
 
-import sourcemaps from 'gulp-sourcemaps';
-import concat from 'gulp-concat';
-import babel from 'gulp-babel';
-import uglify from 'gulp-uglify';
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 
-export default () => {
-
+module.exports = () => {
     return gulp.src([
-        './'+config.paths.source+'/js/**/*.js'
-        ]).pipe(sourcemaps.init())
+            `./${config.paths.source}/js/libraries/**/*.js`,
+            `./${config.paths.source}/js/plugins/**/*.js`,
+            `./${config.paths.source}/js/website/**/*.js`,
+        ])
+        .pipe(gulpif( /MINIFY/.test(process.env.COMMANDS),
+            sourcemaps.init()
+        ))
             .pipe(babel({
                 presets: ['es2015']
             }))
             .on('error', notify.onError(function (error) {
-                return { icon:false, title:'JS ERROR ON LINE '+error.loc.line, message:error.message.replace(/(.\.js:)( .)/,"$1\n$2") };
+                return {
+                    icon: false,
+                    title: `JS ERROR ON LINE ${error.loc.line}`,
+                    message: error.message.replace(/(.\.js:)( .)/,"$1\n$2")
+                };
             }))
+            .pipe(gulpif( /MINIFY/.test(process.env.COMMANDS),
+                uglify()
+            ))
             .pipe(concat('all.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./'+config.paths.test+'/assets/js'));
+        .pipe(gulpif( /MINIFY/.test(process.env.COMMANDS),
+            sourcemaps.write()
+        ))
+        .pipe(gulp.dest(`${process.env.DEST}/assets/js`));
 }

@@ -1,19 +1,24 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const notify = require('gulp-notify');
 
-import clean from 'gulp-clean';
+const clean = require('gulp-clean');
 
-export default () => {
+module.exports = () => {
 
-    return gulp.src( './'+config.paths.test+'/assets/fonts', {read: false} )
+    return gulp.src( `${process.env.DEST}/assets/fonts`, {read: false} )
         .pipe(clean())
         .on('end', () => {
-            return gulp.src( './'+config.paths.source+'/fonts/**' )
-                .pipe(gulp.dest( './'+config.paths.test+'/assets/fonts' ))
-                .pipe(notify({ icon:false, onLast:true, title:'Font assets updated', message: 'Cleaned and copied font to dist/assets/fonts' }));
+            return gulp.src( `./${config.paths.source}/fonts/**/*` )
+                .pipe(gulp.dest( `${process.env.DEST}/assets/fonts` ))
+                .pipe(notify({
+                    icon: false,
+                    onLast: true,
+                    title: `Font assets updated`,
+                    message: `Cleaned and copied font to dist/assets/fonts`
+                }));
         });
 }
