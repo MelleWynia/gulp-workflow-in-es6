@@ -1,19 +1,31 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const notify = require('gulp-notify');
 
-import clean from 'gulp-clean';
+const clean = require('gulp-clean');
+const imagemin = require('gulp-imagemin');
 
-export default () => {
+module.exports = () => {
 
-    return gulp.src( './'+config.paths.test+'/assets/images', {read: false} )
+    return gulp.src( `${process.env.DEST}/assets/images`, {read: false} )
         .pipe(clean())
-        .on('end', function(){
-            return gulp.src( './'+config.paths.source+'/images/**' )
-                .pipe(gulp.dest( './'+config.paths.test+'/assets/images' ))
-                .pipe(notify({ icon:false, onLast:true, title:'Image asset updated', message: 'Cleaned and copied images to dist/asset/image' }));
+        .on('end', () => {
+            return gulp.src( `./${config.paths.source}/images/**` )
+                .pipe(gulpif( /MINIFY/.test(process.env.COMMANDS),
+                    imagemin({
+                        progressive: true
+                    })
+                ))
+                .pipe(gulp.dest( `./${process.env.DEST}/assets/images` ))
+                .pipe(notify({
+                    icon: false,
+                    onLast: true,
+                    title: `Image asset updated`,
+                    message: `Cleaned${/MINIFY/.test(process.env.COMMANDS) ? `, optimized` : ``} and copied images to /assets/image`
+                }));
         });
 }

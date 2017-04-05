@@ -1,37 +1,78 @@
 'use strict';
 
-import config from '../gulpfile.config';
+const npm_package = require('../package.json');
+const config = require('../gulpfile.config');
 
-import gulp from 'gulp';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const gulpfilter = require('gulp-filter');
+const notify = require('gulp-notify');
 
-import pug from 'gulp-pug';
+const pug = require('gulp-pug');
+const pugIncludeGlob = require('pug-include-glob');
 
-export default () => {
+module.exports = () => {
 
-    //
-    // You can easily uncomment the notifications - these
-    // can be handy when your pug tasks takes long (> 7 sec)
-    // and it starts to be handy to be informed when it’s ready.
-    //
-
-    return gulp.src( './'+config.paths.source+'/pug/*.pug' )
-        //.pipe(notify({ icon:false, onLast:false, title:'Processing pug', message: 'Started processing changes in pug' }))
+    return gulp
+        .src([
+            `./${config.paths.source}/website/*.pug`,
+        ])
         .pipe(pug({
             pretty: true,
             data: {
-              config: config
-            }
-        })).on('error', notify.onError(function (error) {
-            
+                npm_package: npm_package,
+                config: config,
+            },
+            plugins: [
+                pugIncludeGlob({}),
+            ]
+        }))
+        .on('error', notify.onError( (error) => {
+
             console.log(error);
-            let filename = error.filename || error.path;
-                filename = filename.replace(/^.*\/(.+?)$/,'$1');
-            let title = 'PUG ERROR ON LINE '+error.line+' IN: '+filename;
-            let message = error.msg || error.message;
+
+            // Process path
+
+            let path = error.path || error.filename;
+            let regExpPath = new RegExp(`^.+(\/${config.paths.source}\/.+)$`);
+
+            if (path) {
+                path = path.replace(regExpPath, '$1');
+            }
+
+            // Process line number
+
+            let line = error.line;
+
+            if (!line) {
+
+                if (error.showStack) {
+                    let regExpMessage = new RegExp('^(?:.*\n.*)*([0-9]+)(?:.*\n.*)*');
+                    let messageMatches = error.message.match(regExpMessage);
+
+                    // DEBUG: console.log('############ LINE', messageMatches);
+
+                    if (messageMatches) {
+                        line = messageMatches[1];
+                    }
+                } else {
+                    let regExpMessage = new RegExp('^.*:([0-9]+)\n','i');
+                    let messageMatches = error.message.match(regExpMessage);
+
+                    // DEBUG: console.log('############ LINE', messageMatches);
+
+                    if (messageMatches) {
+                        line = messageMatches[1];
+                    }
+                }
+            }
+
+            // Compose notification parts
+
+            let title = `PUG ERROR${ line ? ' — LINE ' + line : '' }`;
+            let message = `${path}\n${error.msg ? error.msg: ''}`;
 
             return { icon:false, title:title, message:message };
         }))
-        .pipe(gulp.dest( './'+config.paths.test+'' ))
-        //.pipe(notify({ icon:false, onLast:true, title:'Updated pug', message: 'Compiled the pug to html' }));
+        .pipe(gulp.dest( process.env.DEST  ));
 }
