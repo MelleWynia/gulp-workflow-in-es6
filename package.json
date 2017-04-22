@@ -4,7 +4,8 @@
   "description": "Peace of mind with Gulp on the next level",
   "main": "gulpfile.babel.js",
   "scripts": {
-    "test": "gulp"
+    "dev": "gulp",
+    "build": "gulp --build --minify"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.1.2",
     "gulp-watch": "^4.3.11",
+    "moment": "^2.18.1",
     "pug-include-glob": "^0.3.3"
   },
   "author": "Melle Wynia",
