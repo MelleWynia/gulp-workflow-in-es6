@@ -2,8 +2,9 @@
 1. Get useful notifications when something / compiling goes wrong (in pug, es6 or css)
 2. Precompiled es6 will automatically be compiled (babel, in the `js` task)
 
-# Get started...
+# Getting started!
 
+0. Clone the git project locally
 1. Install ^v7 of [Node.js](https://nodejs.org) 
     - In case you’ve already installed Node.js, you may break older Node applications/workflows with the latest version. So in that case I recommend to install `n` which allows you to switch between Node versions. Run `npm install n -global` and `n 6.2.0`. From there you can just run `n` to switch between Node versions.
 2. Run `npm install gulp-cli -global`
